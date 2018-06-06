@@ -4,13 +4,19 @@ import {toFahrenheit} from '../temperatur.js';
 describe('celcius to Fahrenheit test suit', ()=>{
 
   test('it is a valid number', ()=>{
+    let param = toFahrenheit(300);
+    let actual = isNaN(param);
+    let expected = false;
+    expect(actual).toBe(expected);
+  });
+  test('it is a convertable string number', ()=>{
     let param = toFahrenheit('300');
     let actual = isNaN(param);
     let expected = false;
     expect(actual).toBe(expected);
   });
   test('a lower value than -273.15 gives NaN',()=>{
-    let far = toFahrenheit(-300);
+    let far = toFahrenheit(-273.16);
     let actual = isNaN(far);
     let expected = true;
     expect(actual).toBe(expected);

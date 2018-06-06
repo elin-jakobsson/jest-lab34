@@ -1,9 +1,8 @@
 
-import {deposit,withdraw,amountValid, accountValid} from '../bank.js';
+import {deposit,withdraw,transfer,amountValid, accountValid} from '../bank.js';
 
-// infinity
-// -value
 describe('bank test suit', ()=>{
+
   // amount
   test('amount is a number', ()=>{
       let actual = amountValid(10); // lägger till kalle värde 160
@@ -29,6 +28,7 @@ describe('bank test suit', ()=>{
     expect(()=> amountValid(-2)).toThrow();
   });
 
+
   // account
   test('account exist', ()=>{
       let actual = accountValid('kalle'); // lägger till kalle värde 180
@@ -49,21 +49,20 @@ describe('bank test suit', ()=>{
 
   // deposit
   test('deposit was succssesfull',()=>{
-    let actual = deposit('greta', 50);
-    expect(isNaN(actual)).toBe(false);
+    expect(deposit('greta', 50)).toBe(true);
   });
 
-  test('deposit adds to balance',()=>{
-    let actual = deposit('greta', 50);
-    // console.log(actual);
-    expect(actual).toBe(1300);
-  });
-
-  test('deposit never returns a value less then original balance',()=>{
-    let actual = deposit('greta', 50);
-    console.log(actual);
-    expect(actual).toBeGreaterThan(1200);
-  });
+  // test('deposit adds to balance',()=>{
+  //   let actual = deposit('greta', 50);
+  //   // console.log(actual);
+  //   expect(actual).toBe(1300);
+  // });
+  //
+  // test('deposit never returns a value less then original balance',()=>{
+  //   let actual = deposit('greta', 50);
+  //   console.log(actual);
+  //   expect(actual).toBeGreaterThan(1200);
+  // });
 
   test('throw if amount is negative in deposit', ()=>{
       expect(()=> deposit('greta', -10)).toThrow();
@@ -73,17 +72,21 @@ describe('bank test suit', ()=>{
     expect(()=> deposit('lisa', -10)).toThrow();
   });
 
-  // withdraw
-  test('whitdraw takes away from balance',()=>{
-    let actual = withdraw('greta', 50);
-    console.log(actual);
-    expect(actual).toBe(1300);
-  });
 
-  test('whitdraw never returns a value bigger then original balance',()=>{
-    let actual = withdraw('greta', 50);
-    // console.log(actual);
-    expect(actual).toBeLessThan(1300);
+  // withdraw
+  // test('whitdraw takes away from balance',()=>{
+  //   let actual = withdraw('greta', 50);
+  //   expect(actual).toBe(1300);
+  // });
+  //
+  // test('whitdraw never returns a value bigger then original balance',()=>{
+  //   let actual = withdraw('greta', 50);
+  //   // console.log(actual);
+  //   expect(actual).toBeLessThan(1300);
+  // });
+
+  test('withdraw was succssesfull',()=>{
+    expect(withdraw('greta', 50)).toBe(true);
   });
 
   test('throw if amount is negative in withdraw', ()=>{
@@ -94,7 +97,18 @@ describe('bank test suit', ()=>{
       expect(()=> withdraw('greta', 1400)).toThrow();
   });
 
+  test('throw if witdraw is unsuccssesfull because of invalid input',()=>{
+    expect(()=> withdraw('lisa', -10)).toThrow();
+  });
 
+
+ //transfer
+ test('transfer was succssesfull',()=>{
+   expect(transfer('greta','kalle',100)).toBe(true);
+ });
+ test('throw if transfer is unsuccssesfull because of invalid input',()=>{
+   expect(()=> transfer('lisa','kalle', 10)).toThrow();
+ });
 
 
 });

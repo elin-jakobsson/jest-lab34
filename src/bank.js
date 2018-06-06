@@ -2,18 +2,10 @@
 
 // let kalle = { name: 'Kalle', balance: 150 };
 // let greta = { name: 'Greta', balance: 1200 };
-
 var accountDatabase = {
   kalle:{name: 'Kalle', balance: 150 },
   greta: { name: 'Greta', balance: 1200 }
 }
-
-
-
-// exempel på användning:
-// deposit(kalle, 200);
-// withdraw(kalle, 150);
-// transfer(kalle, greta, 400);
 
 function amountValid(amount){
   if (isNaN(amount)) {
@@ -45,43 +37,6 @@ function accountValid(account){
   }
 } //accountValid
 
-
-// function depositeWhitdraw(account=undefined,amount=undefined){
-//
-//   let trueAccount = false;
-//   let trueAmount = false;
-//
-//   trueAccount= accountValid(account);
-//   trueAmount= amountValid(amount);
-//
-//   if (trueAccount && trueAmount) {
-//     deposit(account, amount);
-//     withdraw(account, amount);
-//     return true;
-//   }else {
-//     throw new Error('the action to withdraw or deposit was not succssesfull');
-//     return false;
-//   }
-// }// depositeWhitdraw
-
-// function isNumber(num){
-//   if (isNaN(num)) {
-//     throw new Error('The given amount is not a valid number');
-//     return false;
-//   }else {
-//     return true;
-//   }
-// } // isNumber
-
-// function isValidAccount(account){
-//   if (accountDatabase.includes(account)) {
-//     return true;
-//   }else {
-//     throw new Error('The given account is not a valid account');
-//     return false;
-//   }
-// }
-//
 function deposit(account, amount) {
 
   let trueAccount = false;
@@ -96,8 +51,8 @@ function deposit(account, amount) {
        num = Number(amount)
       }
       if (num > 0) {
-        let before = accountDatabase[account].balance;
-        return accountDatabase[account].balance = before + num;
+        accountDatabase[account].balance += num;
+        return true;
       }else {
         throw new Error('you cant add a negative value in deposit');
         return false;
@@ -106,10 +61,9 @@ function deposit(account, amount) {
     throw new Error('the action to deposit was not succssesfull');
     return false;
   }
-}
+} // deposit
 
 function withdraw(account, amount) {
-
   let trueAccount = false;
   let trueAmount = false;
 
@@ -129,24 +83,49 @@ function withdraw(account, amount) {
         throw new Error('You cant withdraw more than you have on the acount');
         return false;
       } else {
-        let before = accountDatabase[account].balance;
-        return accountDatabase[account].balance = before - num;
+        accountDatabase[account].balance -= num;
+        return true;
       }
   }else {
     throw new Error('the action to witdraw was not succssesfull');
     return false;
   }
-}
+} // withdraw
 
-// function transfer(accountSender, accountReceiver, amount) {
-//
-//
-// 	if( (typeof accountReceiver.balance) !== 'number'	|| accountReceiver.balance
-// 	throw new Error('');
-// accountSender.balance -= amount;
-// }
+function transfer(accountSender, accountReceiver, amount) {
+  let trueAccount = false;
+  let secondTrueAccount = false;
+  let trueAmount = false;
 
-export {deposit,withdraw,amountValid, accountValid};
+  trueAccount= accountValid(accountSender);
+  secondTrueAccount = accountValid(accountReceiver);
+  trueAmount= amountValid(amount);
+
+  if (trueAccount && secondTrueAccount && trueAmount) {
+    let num = amount;
+      if(typeof num === 'string'){
+       num = Number(amount)
+      }
+      if (num < 0) {
+        throw new Error('you cant transfer a negative value in transfer');
+        return false;
+      }
+      if (num > accountDatabase[accountSender].balance) {
+        throw new Error('You cant transfer more than you have on the account');
+        return false;
+      } else {
+        accountDatabase[accountSender].balance -= num;
+        accountDatabase[accountReceiver].balance += num;
+         return true;
+      }
+  }else {
+    throw new Error('the action to transfer was not succssesfull');
+    return false;
+  }
+
+} //transfer
+
+export {deposit,withdraw, transfer,amountValid, accountValid};
 
 
 

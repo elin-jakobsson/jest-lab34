@@ -1,0 +1,19 @@
+Gå igenom den andra gruppens kod för varje uppgift och svara på följande frågor.
+1. Har ni testat samma saker?
+2. Om ni har missat något testfall som de andra täckte in - varför tänkte ni inte på det? Hur kan man tänka för att inte missa sådana fall i framtiden?
+3. Vilka är de viktigaste testfallen?
+
+
+Har ni testat samma saker?
+// skriv observering kring varandras kod...
+
+Vad har vi missat och varför missade vi det?
+// text...
+
+Tankar till inför framtiden
+// text...
+
+Vilka är det viktigaste testfallen?
+testen för gränsvärden -- att man har tydliga gärnser för tillåtna värden.
+testen för validering av typvärden string, number, object osv. att du får det du förväntar dig att få för att slippa framtida error.
+testen för otillåtna värden Infinity, -Infinity, NaN, null, undefined. 
