@@ -28,7 +28,7 @@ function amountValid(amount){
   }else {
     return true;
   }
-}
+} //amountValid
 
 function accountValid(account){
   if (accountDatabase.hasOwnProperty(account)) {
@@ -43,36 +43,26 @@ function accountValid(account){
     throw new Error('The given account is not a valid account');
     return false;
   }
-
-}
-
-
-function bankfunktion(account=undefined,secondAccount=undefined,amount=undefined){
-
-  let trueAccount = false;
-  let secondTrueAccount = false;
-  let trueAmount = false;
-
-  trueAccount= accountValid(account);
-  secondTrueAccount= accountValid(secondAccount);
-  trueAmount= amountValid(amount);
-  console.log(trueAccount);
-  console.log(trueAmount);
-  console.log(secondTrueAccount);
+} //accountValid
 
 
-  if (trueAccount && trueAmount) {
-    deposit(account, amount);
-    withdraw(account, amount);
-
-    // return true;
-    // transfer(kalle, greta, 400);
-    // return true;
-  }
-
-
-
-}// bankfunktion
+// function depositeWhitdraw(account=undefined,amount=undefined){
+//
+//   let trueAccount = false;
+//   let trueAmount = false;
+//
+//   trueAccount= accountValid(account);
+//   trueAmount= amountValid(amount);
+//
+//   if (trueAccount && trueAmount) {
+//     deposit(account, amount);
+//     withdraw(account, amount);
+//     return true;
+//   }else {
+//     throw new Error('the action to withdraw or deposit was not succssesfull');
+//     return false;
+//   }
+// }// depositeWhitdraw
 
 // function isNumber(num){
 //   if (isNaN(num)) {
@@ -93,35 +83,59 @@ function bankfunktion(account=undefined,secondAccount=undefined,amount=undefined
 // }
 //
 function deposit(account, amount) {
-  let num = amount;
-    if(typeof num === 'string'){
-     num = Number(amount)
-    }
-    if (num > 0) {
-      let before = accountDatabase[account].balance;
-      return accountDatabase[account].balance = before + num;
-    }else {
-      throw new Error('you cant add a negative value in deposit');
-      return false;
-    }
+
+  let trueAccount = false;
+  let trueAmount = false;
+
+  trueAccount= accountValid(account);
+  trueAmount= amountValid(amount);
+
+  if (trueAccount && trueAmount) {
+    let num = amount;
+      if(typeof num === 'string'){
+       num = Number(amount)
+      }
+      if (num > 0) {
+        let before = accountDatabase[account].balance;
+        return accountDatabase[account].balance = before + num;
+      }else {
+        throw new Error('you cant add a negative value in deposit');
+        return false;
+      }
+  }else {
+    throw new Error('the action to deposit was not succssesfull');
+    return false;
+  }
 }
 
 function withdraw(account, amount) {
-  let num = amount;
-    if(typeof num === 'string'){
-     num = Number(amount)
-    }
-    if (num < 0) {
-      throw new Error('you cant withdraw a negative value in withdraw');
-      return false;
-    }
-    if (num > accountDatabase[account].balance) {
-      throw new Error('You cant withdraw more than you have on the acount');
-      return false;
-    } else {
-      let before = accountDatabase[account].balance;
-      return accountDatabase[account].balance = before - num;
-    }
+
+  let trueAccount = false;
+  let trueAmount = false;
+
+  trueAccount= accountValid(account);
+  trueAmount= amountValid(amount);
+
+  if (trueAccount && trueAmount) {
+    let num = amount;
+      if(typeof num === 'string'){
+       num = Number(amount)
+      }
+      if (num < 0) {
+        throw new Error('you cant withdraw a negative value in withdraw');
+        return false;
+      }
+      if (num > accountDatabase[account].balance) {
+        throw new Error('You cant withdraw more than you have on the acount');
+        return false;
+      } else {
+        let before = accountDatabase[account].balance;
+        return accountDatabase[account].balance = before - num;
+      }
+  }else {
+    throw new Error('the action to witdraw was not succssesfull');
+    return false;
+  }
 }
 
 // function transfer(accountSender, accountReceiver, amount) {
@@ -132,7 +146,7 @@ function withdraw(account, amount) {
 // accountSender.balance -= amount;
 // }
 
-export {bankfunktion,deposit,withdraw,amountValid, accountValid};
+export {deposit,withdraw,amountValid, accountValid};
 
 
 

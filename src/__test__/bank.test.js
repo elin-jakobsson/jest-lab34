@@ -1,5 +1,5 @@
 
-import {bankfunktion,deposit,withdraw,amountValid, accountValid} from '../bank.js';
+import {deposit,withdraw,amountValid, accountValid} from '../bank.js';
 
 // infinity
 // -value
@@ -48,10 +48,15 @@ describe('bank test suit', ()=>{
   });
 
   // deposit
+  test('deposit was succssesfull',()=>{
+    let actual = deposit('greta', 50);
+    expect(isNaN(actual)).toBe(false);
+  });
+
   test('deposit adds to balance',()=>{
     let actual = deposit('greta', 50);
-    console.log(actual);
-    expect(actual).toBe(1250);
+    // console.log(actual);
+    expect(actual).toBe(1300);
   });
 
   test('deposit never returns a value less then original balance',()=>{
@@ -64,18 +69,21 @@ describe('bank test suit', ()=>{
       expect(()=> deposit('greta', -10)).toThrow();
   });
 
+  test('throw if deposit is unsuccssesfull because of invalid input',()=>{
+    expect(()=> deposit('lisa', -10)).toThrow();
+  });
 
   // withdraw
   test('whitdraw takes away from balance',()=>{
     let actual = withdraw('greta', 50);
     console.log(actual);
-    expect(actual).toBe(1250);
+    expect(actual).toBe(1300);
   });
 
   test('whitdraw never returns a value bigger then original balance',()=>{
     let actual = withdraw('greta', 50);
-    console.log(actual);
-    expect(actual).toBeLessThan(1250);
+    // console.log(actual);
+    expect(actual).toBeLessThan(1300);
   });
 
   test('throw if amount is negative in withdraw', ()=>{
@@ -86,10 +94,7 @@ describe('bank test suit', ()=>{
       expect(()=> withdraw('greta', 1400)).toThrow();
   });
 
-  //transfer
-  test('sckjdnc', ()=>{
 
-  });
 
 
 });
