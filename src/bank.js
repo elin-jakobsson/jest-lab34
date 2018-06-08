@@ -2,47 +2,41 @@
 
 // let kalle = { name: 'Kalle', balance: 150 };
 // let greta = { name: 'Greta', balance: 1200 };
-var accountDatabase = {
-  kalle:{name: 'Kalle', balance: 150 },
-  greta: { name: 'Greta', balance: 1200 }
-}
+// var accountDatabase = {
+//   kalle:{name: 'Kalle', balance: 150 },
+//   greta: { name: 'Greta', balance: 1200 }
+// }
 
 function amountValid(amount){
   if (isNaN(amount)) {
     throw new Error('The given amount is not a valid number');
-    return false;
   }else if (isFinite(amount)===false) {
     throw new Error('The given amount can not be Infinity');
-    return false;
   }else if (amount < 0) {
     throw new Error('The given amount can not be a negative value');
-    return false;
   }else {
     return true;
   }
 } //amountValid
 
-function accountValid(account){
-  if (accountDatabase.hasOwnProperty(account)) {
+function accountValid(allAccountObj,account){
+  if (allAccountObj.hasOwnProperty(account)) {
     return true;
   } else if (account === undefined) {
     throw new Error('The given account returns undefined');
-    return false;
   } else if (account === '') {
     throw new Error('The given account is a emty string');
-    return false;
   }else {
     throw new Error('The given account is not a valid account');
-    return false;
   }
 } //accountValid
 
-function deposit(account, amount) {
+function deposit(allAccountObj,account, amount) {
 
   let trueAccount = false;
   let trueAmount = false;
 
-  trueAccount= accountValid(account);
+  trueAccount= accountValid(allAccountObj,account);
   trueAmount= amountValid(amount);
 
   if (trueAccount && trueAmount) {
@@ -51,23 +45,20 @@ function deposit(account, amount) {
        num = Number(amount)
       }
       if (num > 0) {
-        accountDatabase[account].balance += num;
-        return true;
+        allAccountObj[account].balance += num;
       }else {
         throw new Error('you cant add a negative value in deposit');
-        return false;
       }
   }else {
     throw new Error('the action to deposit was not succssesfull');
-    return false;
   }
 } // deposit
 
-function withdraw(account, amount) {
+function withdraw(allAccountObj,account, amount) {
   let trueAccount = false;
   let trueAmount = false;
 
-  trueAccount= accountValid(account);
+  trueAccount= accountValid(allAccountObj,account);
   trueAmount= amountValid(amount);
 
   if (trueAccount && trueAmount) {
@@ -77,28 +68,24 @@ function withdraw(account, amount) {
       }
       if (num < 0) {
         throw new Error('you cant withdraw a negative value in withdraw');
-        return false;
       }
-      if (num > accountDatabase[account].balance) {
+      if (num > allAccountObj[account].balance) {
         throw new Error('You cant withdraw more than you have on the acount');
-        return false;
       } else {
-        accountDatabase[account].balance -= num;
-        return true;
+        allAccountObj[account].balance -= num;
       }
   }else {
     throw new Error('the action to witdraw was not succssesfull');
-    return false;
   }
 } // withdraw
 
-function transfer(accountSender, accountReceiver, amount) {
+function transfer(allAccountObj,accountSender, accountReceiver, amount) {
   let trueAccount = false;
   let secondTrueAccount = false;
   let trueAmount = false;
 
-  trueAccount= accountValid(accountSender);
-  secondTrueAccount = accountValid(accountReceiver);
+  trueAccount= accountValid(allAccountObj,accountSender);
+  secondTrueAccount = accountValid(allAccountObj,accountReceiver);
   trueAmount= amountValid(amount);
 
   if (trueAccount && secondTrueAccount && trueAmount) {
@@ -108,19 +95,15 @@ function transfer(accountSender, accountReceiver, amount) {
       }
       if (num < 0) {
         throw new Error('you cant transfer a negative value in transfer');
-        return false;
       }
-      if (num > accountDatabase[accountSender].balance) {
+      if (num > allAccountObj[accountSender].balance) {
         throw new Error('You cant transfer more than you have on the account');
-        return false;
       } else {
-        accountDatabase[accountSender].balance -= num;
-        accountDatabase[accountReceiver].balance += num;
-         return true;
+        allAccountObj[accountSender].balance -= num;
+        allAccountObj[accountReceiver].balance += num;
       }
   }else {
     throw new Error('the action to transfer was not succssesfull');
-    return false;
   }
 
 } //transfer
