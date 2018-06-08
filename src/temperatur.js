@@ -1,7 +1,7 @@
 
 function toFahrenheit(cel=undefined){
 
-  if (isNaN(cel) || isFinite(cel)===false || cel=== '') {
+  if (isNaN(cel) || isFinite(cel)===false || cel=== '' || cel === null) {
     return NaN;
   }else {
     let num = cel;

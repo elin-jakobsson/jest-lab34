@@ -11,8 +11,6 @@ describe('test av omvandling av temperatu', () => {
 
   test('below -273.15 return NaN', ()=>{
     expect(toFahrenheit(-273.16)).toBeNaN();
-    let highestSequreNumber = 9007199254740991
-    expect(toFahrenheit(highestSequreNumber)).toBeNaN();
   })
 
   test('test of string "kalle" to be NaN', ()=>{
