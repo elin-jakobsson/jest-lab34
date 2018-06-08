@@ -8,14 +8,13 @@ describe('test of bank system deposit ', ()=>{
       name: "kalle",
       balance: 1200
     }
-
     let amount = 1000;
     let expectValue = {...kalle, balance: kalle.balance + amount }
     deposit(kalle, amount);
     expect(kalle).toEqual(expectValue);
   })
 
-  test('check if account dosent contain key of name', ()=> {
+  test('throw if account dosent contain key of name', ()=> {
     let kalle = {
         balance: 1200
       }
@@ -23,11 +22,12 @@ describe('test of bank system deposit ', ()=>{
     expect( ()=>{deposit(kalle, amount)}).toThrowError(Error);
   })
 
-  test('check if account.name is not a empty string or is string', ()=> {
+  test('throw if account.name is not a valid string', ()=> {
     let kalle = {
         balance: 1200
     }
     let amount = 1000;
+    expect( ()=>{deposit()}).toThrowError(Error);
     expect( ()=>{deposit( null , amount)}).toThrowError(Error);
     expect( ()=>{deposit( [] , amount)}).toThrowError(Error);
     expect( ()=>{deposit( {name: "", balance: 1200}, amount)}).toThrowError(Error);
@@ -36,13 +36,13 @@ describe('test of bank system deposit ', ()=>{
     expect( ()=>{deposit( {name: undefined, balance: 1200}, amount)}).toThrowError(Error);
   })
 
-  test('check if account.balance is not a empty or is not a number', ()=> {
+  test('check if account.balance is not empty or is not a number', ()=> {
     let kalle = {
         balance: 1200
     }
     let amount = 1000;
-    expect( ()=>{deposit( {name: "kalle", balance: "" }, amount)} ).toThrowError(Error);
-    expect( ()=>{deposit( {name: "kalle", balance: {} }, amount)} ).toThrowError(Error);
+    expect( ()=>{deposit( {name: "kalle", balance: ""  }, amount)} ).toThrowError(Error);
+     expect( ()=>{deposit( {name: "kalle", balance: {} }, amount)} ).toThrowError(Error);
     expect( ()=>{deposit( {name: "kalle", balance: null }, amount)} ).toThrowError(Error);
     expect( ()=>{deposit( {name: "kalle", balance: undefined }, amount)} ).toThrowError(Error);
   })

@@ -13,16 +13,21 @@ function deposit(account, amount) {
 	} else {
 		throw new Error(`${account} missing key "name"`)
 	}
+
 	if(account.hasOwnProperty('balance')){
-			if( typeof account.balance !== 'number' || account.balance === null || account.balance === NaN){
+			if( isNaN(account.balance) || account.balance === null || (isFinite(account.balance)===false) || account.balance === ""){
 			throw new Error(`${account.balance} account.balance must be a number`)
 		}
 	} else {
 		throw new Error(`${account} missing key "number"`)
 	}
 
-	if(typeof amount !== 'number' || amount === NaN ){
-		throw new Error(`${amount} amount must be a key number`)
+	if( isNaN(amount) || amount === null || (isFinite(amount)===false) || amount === "" || (typeof amount === 'object')){
+		throw new Error(`${amount} amount must be a valid number`)
+	}
+
+	if (amount < 0) {
+		throw new Error('you cant deposit a negative value in deposit');
 	}
 
 	account.balance += amount;
@@ -37,71 +42,77 @@ function withdraw(account, amount) {
 	} else {
 		throw new Error(`${account} missing key "name"`)
 	}
+
 	if(account.hasOwnProperty('balance')){
-			if( typeof account.balance !== 'number' || account.balance === null || account.balance === NaN){
+			if( isNaN(account.balance) || account.balance === null || (isFinite(account.balance)===false) || account.balance === ""){
 			throw new Error(`${account.balance} account.balance must be a number`)
 		}
 	} else {
 		throw new Error(`${account} missing key "number"`)
 	}
 
-	if(typeof amount !== 'number' || amount === NaN ){
-		throw new Error(`${amount} amount must be a key number`)
+	if( isNaN(amount) || amount === null || (isFinite(amount)===false) || amount === "" || (typeof amount === 'object')){
+		throw new Error(`${amount} amount must be a valid number`)
 	}
 
-	if( amount <= 0 )
-		throw new Error('Amount must be a positive number!');
+	if (amount < 0) {
+		throw new Error('you cant withdraw a negative value in withdraw');
+	}
+
+	if (amount > account.balance){
+		throw new Error('You cant withdraw more than you have on the acount');
+	}
 
 	account.balance -= amount;
+
 }
+
 
 function transfer(accountSender, accountReceiver, amount) {
 	if(accountSender.hasOwnProperty('name')){
-			if( typeof accountSender.name !== 'string' || accountSender.name === ""){
+		if( typeof accountSender.name !== 'string' || accountSender.name === ""){
 			throw new Error(`${accountSender.name} account.name must be a string`)
 		}
 	} else {
 		throw new Error(`${account} missing key "name"`)
 	}
 	if(accountSender.hasOwnProperty('balance')){
-			if( typeof accountSender.balance !== 'number' || accountSender.balance === null || accountSender.balance === NaN){
+		if( isNaN(accountSender.balance) || accountSender.balance === null || (isFinite(accountSender.balance)===false) || accountSender.balance === ""){
 			throw new Error(`${accountSender.balance} account.balance must be a number`)
 		}
 	} else {
-		throw new Error(`${account} missing key "number"`)
+		throw new Error(`${account} missing key "balance"`)
 	}
 
 	if(accountReceiver.hasOwnProperty('name')){
-			if( typeof accountReceiver.name !== 'string' || accountReceiver.name === ""){
+		if( typeof accountReceiver.name !== 'string' || accountReceiver.name === ""){
 			throw new Error(`${accountReceiver.name} account.name must be a string`)
 		}
 	} else {
 		throw new Error(`${account} missing key "name"`)
 	}
 	if(accountReceiver.hasOwnProperty('balance')){
-			if( typeof accountReceiver.balance !== 'number' || accountReceiver.balance === null || accountReceiver.balance === NaN){
+		if( isNaN(accountReceiver.balance) || accountReceiver.balance === null || (isFinite(accountReceiver.balance)===false) || accountReceiver.balance === ""){
 			throw new Error(`${accountReceiver.balance} account.balance must be a number`)
 		}
 	} else {
-		throw new Error(`${account} missing key "number"`)
+		throw new Error(`${account} missing key "balance"`)
 	}
 
-	if(typeof amount !== 'number' || amount === NaN ){
-		throw new Error(`${amount} amount must be a key number`)
+	if( isNaN(amount) || amount === null || (isFinite(amount)===false) || amount === "" || (typeof amount === 'object')){
+		throw new Error(`${amount} amount must be a valid number`)
 	}
 
 	if( amount <= 0 )
 		throw new Error('Amount must be a positive number!');
 
-	if( accountSender.balance - amount < 0 )
+
+	if( accountSender.balance < amount )
 		throw new Error('Sender have not that kind of money :)');
 
   accountSender.balance -= amount;
   accountReceiver.balance += amount;
 }
 
-// deposit(kalle, 200);
-// withdraw(kalle, 150);
-// transfer(kalle, greta, 400);
 
 export {deposit, withdraw, transfer};

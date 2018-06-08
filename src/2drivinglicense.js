@@ -18,7 +18,7 @@ let canGetLicense = (license, age) => {
   }
 
   if(age > 120){
-    throw new Error('input parameter age is to high, max 120')
+    throw new Error('input parameter age is to high, max 120, To old to drive')
   }
 
   let driverObj = {

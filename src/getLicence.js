@@ -17,7 +17,7 @@ function canGetLicense(license, age) {
     trueLicence = true;
   }else {
     throw new Error('The licence is not a valid type of licence');
-    return false;
+    // return false;
   }
 
   // kolla att åldern är en riktig siffra
@@ -28,7 +28,7 @@ function canGetLicense(license, age) {
     }
   }else {
     throw new Error('The age is not a valid number');
-    return false;
+    // return false;
   }
 
   // körkort och ålter matchar
