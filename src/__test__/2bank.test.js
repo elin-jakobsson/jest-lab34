@@ -1,4 +1,4 @@
-import {deposit, withdraw, transfer } from '../2bank.js';
+import {deposit, withdraw, transfer } from '../bank.js';
 
 
 describe('test of bank system deposit ', ()=>{
