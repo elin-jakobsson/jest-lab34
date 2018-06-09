@@ -1,5 +1,5 @@
 
-import {canGetLicense } from '../2drivinglicense.js';
+import {canGetLicense } from '../drivinglicense.js';
 
 describe('getLicence test suit ', ()=>{
 
