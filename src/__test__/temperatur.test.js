@@ -1,5 +1,5 @@
 
-import {toFahrenheit} from '../2temperature.js';
+import {toFahrenheit} from '../temperature.js';
 
 describe('celcius to Fahrenheit test suit', ()=>{
 
