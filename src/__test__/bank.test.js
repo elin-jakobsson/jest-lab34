@@ -112,7 +112,16 @@ describe('test of bank system withdraw ', ()=>{
     expect( ()=>{withdraw( {name: "kalle", balance: 1200 }, [] )} ).toThrowError(Error);
     expect( ()=>{withdraw( {name: "kalle", balance: 1200 }, undefined )} ).toThrowError(Error);
     expect( ()=>{withdraw( {name: "kalle", balance: 1200 }, null )} ).toThrowError(Error);
-  })
+  });
+
+  test('throw if trying to witdraw more than existing balance', ()=>{
+    expect(()=> {withdraw({name: "kalle", balance: 1200 },1300 )}).toThrow();
+});
+
+  test('throw if amount is negative in withdraw', ()=>{
+
+      expect(()=> {withdraw({name: "kalle", balance: 1200 },-10 )}).toThrow();
+  });
 
 })
 
@@ -205,10 +214,18 @@ describe('test of bank system transfer ', ()=>{
       balance: 1000
     }
     let amount = 1000;
-    expect( ()=>{transfer( {name: "kalle", bert, balance: 1200 }, "" )} ).toThrowError(Error);
-    expect( ()=>{transfer( {name: "kalle", bert, balance: 1200 }, [] )} ).toThrowError(Error);
-    expect( ()=>{transfer( {name: "kalle", bert, balance: 1200 }, undefined )} ).toThrowError(Error);
-    expect( ()=>{transfer( {name: "kalle", bert, balance: 1200 }, null )} ).toThrowError(Error);
-  })
+    expect( ()=>{transfer( {name: "kalle", balance: 1200 },bert, "" )} ).toThrowError(Error);
+    expect( ()=>{transfer( {name: "kalle", balance: 1200 },bert, [] )} ).toThrowError(Error);
+    expect( ()=>{transfer( {name: "kalle", balance: 1200 },bert, undefined )} ).toThrowError(Error);
+    expect( ()=>{transfer( {name: "kalle", balance: 1200 },bert, null )} ).toThrowError(Error);
+  });
+
+  test('throw if amount is negative in transfer', ()=>{
+    let bert = {
+      name: "bert",
+      balance: 1000
+    }
+      expect(()=> {transfer( {name: "kalle", balance: 1200 },bert, -100 )}  ).toThrow();
+  });
 
 })

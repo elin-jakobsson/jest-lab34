@@ -5,15 +5,55 @@ Gå igenom den andra gruppens kod för varje uppgift och svara på följande fr�
 
 
 Har ni testat samma saker?
-// skriv observering kring varandras kod...
+toFahrenheit:
+  Vi har gjort några ytterligare åtgärder för att förhindra otillåtna inparametrar som null och  '' (en tom sträng).
+  Rent övrigt har vi testat samma saker men båda saknar tester för alla gränsvärden.
+
+getLicense:
+  Vi har ej testat en inparameter som är tom däremot fungerar det.
+  Vi har ej testat gränsvärdet 0 men däremot fungerar det.
+  Vi har gjort några ytterligare åtgärder för att förhindra otillåtna inparametrar så som null, objekt, lista, NaN, '' (en tom sträng) och undefined.
+  Vi har även testat en inparameter åt gången med felaktiga värden.
+
+bank:
+  Vi har gjort några ytterligare åtgärder för att förhindra otillåtna inparametrar så som null, objekt, lista, NaN, '' (en tom sträng) och undefined.
+  Vi har även testat en inparameter åt gången med felaktiga värden.
 
 Vad har vi missat och varför missade vi det?
-// text...
+toFahrenheit:
+  Missat:
+    Vi kom själva på att vi missat att testa otillåtna inparameter som en tom array []. Båda grupperna saknar tester gränsvärden, då man borde ha testat
+    gränsvärden som -273.15 som ett tillåtet värde och inte bara -273.16 som ett otillåtet värde.
+  Varför:
+    Visste då inte vid det tillfället att en tom array ger ifrån sig 0 och därför anses som ett nummer och inte ett objekt.
+    Att vi heller inte gjorde tydligare tester för gränsvärden med min och max tillåtna värden, var förmodligen att vi satte större fokus på otillåtna värden.
+
+getLicense:
+  Missat:
+    Vi har missat att sätta in en throw när age är under 0, åldern registreras däremot som ett fel och retunerar false.
+  Varför:
+    Gränsvärdet 0 översågs i farten i vårt arbete och slank därför igenom våran granskning i och med att vi fokuserade mer på minimi åldern för körkortet som 18
+    eller 24.
+
+bank:
+  Missat:
+    Missat att köra funktionerna utan någon inparameter alls (withdraw,transfer)
+  Varför:
+    Många test att ha koll på så är svårt att fånga in allt.
+
 
 Tankar till inför framtiden
-// text...
+  Testa ALLA gränsvärden både tillåtna och otillåtna exempelvis (max och min) värden.
+  Ju mer man jobbar med test desto bättre blir man på att hitta kryphålen som tex [] .
+
+
 
 Vilka är det viktigaste testfallen?
-testen för gränsvärden -- att man har tydliga gärnser för tillåtna värden.
+Test som säger att du får det du förväntar dig och inget annat, till exempel 2+2=4 och att funktionen fungerar korrekt.
+Test som visar att funktionen kan hantera felaktiga eller otillåtna inputvärden som tex. infinity, null, undefined, NaN, [], "" osv. utan att krascha.
+
+Test av gränsvärden, för att se att man får in hela spektrumet av tillåtna värden och att man även testar gränsen för otillåtna värden. Så att man har
+en bra uppfattning av vad som är tillåtet och och vad som ger resultatet false.
+
 testen för validering av typvärden string, number, object osv. att du får det du förväntar dig att få för att slippa framtida error.
-testen för otillåtna värden Infinity, -Infinity, NaN, null, undefined. 
+testen för otillåtna värden Infinity, -Infinity, NaN, null, undefined.
