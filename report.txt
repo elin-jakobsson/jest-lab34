@@ -49,11 +49,8 @@ Tankar till inför framtiden
 
 
 Vilka är det viktigaste testfallen?
-Test som säger att du får det du förväntar dig och inget annat, till exempel 2+2=4 och att funktionen fungerar korrekt.
+Test som säger att du får det du förväntar dig och inget annat, till exempel 2+2=4 och att funktionen fungerar korrekt. Att du får rätt typ av värden.
 Test som visar att funktionen kan hantera felaktiga eller otillåtna inputvärden som tex. infinity, null, undefined, NaN, [], "" osv. utan att krascha.
 
 Test av gränsvärden, för att se att man får in hela spektrumet av tillåtna värden och att man även testar gränsen för otillåtna värden. Så att man har
 en bra uppfattning av vad som är tillåtet och och vad som ger resultatet false.
-
-testen för validering av typvärden string, number, object osv. att du får det du förväntar dig att få för att slippa framtida error.
-testen för otillåtna värden Infinity, -Infinity, NaN, null, undefined.
